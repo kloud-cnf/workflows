@@ -19,16 +19,18 @@
 [![Terraform](https://img.shields.io/static/v1?label=&message=Terraform&color=%237B42BC&logo=terraform)](https://www.terraform.io/use-cases/infrastructure-as-code)
 [![Terragrunt](https://avatars.githubusercontent.com/u/17118990?s=20)](https://github.com/gruntwork-io/terragrunt) [![Semantic Release - angular](https://img.shields.io/static/v1?label=Semantic+Release&message=angular&color=e10079&logo=semantic-release)](https://github.com/semantic-release/semantic-release) [![terraform-docs](https://img.shields.io/static/v1?label=&message=terraform-docs&color=e10079&logo=Docs.rs)](https://github.com/terraform-docs/terraform-docs) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+---
+
 # Workflows
 
-<!-- - [automated releases](./.github/workflows/automated-semver.yaml) via [semantic-release](https://github.com/semantic-release/semantic-release)
-- [build and push](./.github/workflows/build-and-push.yaml) an image to a registry -->
+- [automated releases](./.github/workflows/automated-semver.yaml) via [semantic-release](https://github.com/semantic-release/semantic-release)
+<!-- - [build and push](./.github/workflows/build-and-push.yaml) an image to a registry -->
 
 ---
 
 # Todo
 - [x] README.md
-- [ ] reusable automated releases
+- [x] reusable [automated releases](./.github/workflows/automated-semver.yaml)
 - [ ] reusable build and push workflow
 - [ ] reusable terragrunt workflow
 - [ ] reusable terraform module workflow
