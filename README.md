@@ -31,7 +31,7 @@
 # Todo
 - [x] README.md
 - [x] reusable [automated releases](./.github/workflows/automated-semver.yaml)
-- [x] reusable build and push workflow
+- [x] reusable [build and push](./.github/workflows/build-and-push.yaml) workflow
 - [ ] reusable terragrunt workflow
 - [ ] reusable terraform module workflow
 
