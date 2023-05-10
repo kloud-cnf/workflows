@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/kloud-cnf/workflows/compare/v0.2.0...v0.2.1) (2023-05-10)
+
+
+### Bug Fixes
+
+* **docker:** enable multi-platform image builds for amd64 + arm64 ([a3f01fe](https://github.com/kloud-cnf/workflows/commit/a3f01fe198dd2150913bad692b4dd395767ca30a))
+
 # [0.2.0](https://github.com/kloud-cnf/workflows/compare/v0.1.0...v0.2.0) (2023-05-08)
 
 
