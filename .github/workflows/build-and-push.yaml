@@ -5,6 +5,8 @@ on:
       BOT_TOKEN:
         description: "Service Account Access Token"
         required: true
+      BUILD_SECRETS:
+        required: false
     inputs:
       REGISTRY:
         required: false
@@ -15,9 +17,6 @@ on:
         type: string
       IMAGE_NAME:
         required: true
-        type: string
-      BUILD_SECRETS:
-        required: false
         type: string
 
 jobs:
@@ -55,4 +54,4 @@ jobs:
           push: true
           tags: ${{ steps.metatata.outputs.tags }}
           labels: ${{ steps.metatata.outputs.labels }}
-          secrets: ${{ inputs.BUILD_SECRETS }}
+          secrets: ${{ secrets.BUILD_SECRETS }}
