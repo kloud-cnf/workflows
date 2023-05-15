@@ -16,6 +16,9 @@ on:
       IMAGE_NAME:
         required: true
         type: string
+      BUILD_SECRETS:
+        required: false
+        type: string
 
 jobs:
   build-and-push:
@@ -52,3 +55,4 @@ jobs:
           push: true
           tags: ${{ steps.metatata.outputs.tags }}
           labels: ${{ steps.metatata.outputs.labels }}
+          secrets: ${{ inputs.BUILD_SECRETS }}
