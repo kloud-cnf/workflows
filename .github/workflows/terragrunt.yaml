@@ -1,0 +1,148 @@
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        required: true
+        type: string
+      ci-role-name:
+        type: string
+        required: false
+        description: 'Name of the IAM role to assume'
+        default: 'github-ci'
+      target-account-id:
+        required: true
+        type: string
+        description: 'A Target AWS Account ID'
+      target-region:
+        type: string
+        required: false
+        description: 'A Target AWS Region'
+
+run-name: Deploy ${{ inputs.working-directory }} by @${{ github.actor }}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v3
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+      - name: Setup Terragrunt & Terragrunt
+        run: |
+          brew install tfenv warrensbox/tap/tgswitch cowsay
+          tfenv install
+          tgswitch
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: arn:aws:iam::${{ inputs.target-account-id }}:role/${{ inputs.ci-role-name }}
+          aws-region: ${{ inputs.target-region }}
+      - name: Terragrunt fmt
+        id: fmt
+        run: terragrunt hclfmt --terragrunt-check || ! cowsay "eww your formatting is fucked up"
+        working-directory: ${{ inputs.working-directory }}
+      - name: Terragrunt init
+        id: init
+        run: terragrunt init
+        working-directory: ${{ inputs.working-directory }}
+      - name: Terragrunt validate
+        id: validate
+        run: terragrunt validate -no-color | tee /tmp/validate.txt
+        working-directory: ${{ inputs.working-directory }}
+      - name: Terragrunt plan
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' && github.event_name == 'push'
+        id: plan
+        run: terragrunt plan
+        continue-on-error: true
+        working-directory: ${{ inputs.working-directory }}
+      - name: Terragrunt show
+        id: show
+        run: terragrunt show -no-color tgplan.out | tee /tmp/plan.txt
+        continue-on-error: true
+        working-directory: ${{ inputs.working-directory }}
+      - name: Update Pull Request
+        uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            })
+            const botComment = comments.find(comment => {
+              return comment.user.type === 'Bot' && comment.body.includes('Terragrunt Format and Style')
+            })
+
+            function chunkSubstr(str, size) {
+              const numChunks = Math.ceil(str.length / size)
+              const chunks = new Array(numChunks)
+              for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
+                chunks[i] = str.substr(o, size)
+              }
+              return chunks
+            }
+
+            const fs = require("fs");
+            const validate = fs.readFileSync("/tmp/validate.txt", "utf8");
+            const plan = fs.readFileSync("/tmp/plan.txt", "utf8");
+
+            // Handle large terraform plans
+            let plans = chunkSubstr(plan, 65536);
+
+            for (let i = 0; i < plans.length; i++) {
+              const output = `### ${{ inputs.plan-title }} Part # ${i + 1}
+              #### Terragrunt Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+              #### Terragrunt Initialization ⚙️\`${{ steps.init.outcome }}\`
+              #### Terragrunt Validation 🤖\`${{ steps.validate.outcome }}\`
+
+              <details><summary>Validation Output</summary>
+
+              \`\`\`
+              ${validate}
+              \`\`\`
+
+              </details>
+
+              #### Terragrunt Plan 📖\`${{ steps.plan.outcome }}\`
+              <details><summary>Show Plan</summary>
+
+              \`\`\`
+              ${plans[i]}
+              \`\`\`
+
+              </details>
+
+              *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ inputs.working-directory }}\`, Workflow: \`${{ github.workflow }}\`*`;
+
+              // 3. If we have a comment, update it, otherwise create a new one
+              if (botComment) {
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: botComment.id,
+                  body: output
+                })
+              } else {
+                await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: output
+                })
+              }
+            }
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+      - name: Terragrunt apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        id: apply
+        run: terragrunt apply
+        working-directory: ${{ inputs.working-directory }}

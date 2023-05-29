@@ -25,6 +25,10 @@
 
 - [automated releases](./.github/workflows/automated-semver.yaml) via [semantic-release](https://github.com/semantic-release/semantic-release)
 - [build and push](./.github/workflows/build-and-push.yaml) an image to a registry
+- [terragrunt](./.github/workflows/terragrunt.yaml) workflow providing
+  - trunk based validate, lint, plan and apply
+  - OIDC Authentication to AWS
+  - PR comments on terragrunt validate + plan
 
 ---
 
@@ -32,7 +36,7 @@
 - [x] README.md
 - [x] reusable [automated releases](./.github/workflows/automated-semver.yaml)
 - [x] reusable [build and push](./.github/workflows/build-and-push.yaml) workflow
-- [ ] reusable terragrunt workflow
+- [x] reusable terragrunt workflow
 - [ ] reusable terraform module workflow
 
 ---
