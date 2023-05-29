@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/kloud-cnf/workflows/compare/v0.2.1...v0.3.0) (2023-05-29)
+
+
+### Features
+
+* **terragrunt:** create reusable workflow for terragrunt ([#6](https://github.com/kloud-cnf/workflows/issues/6)) ([f26d0aa](https://github.com/kloud-cnf/workflows/commit/f26d0aaa88290f84fdeb92fd6fa8e9477034006c))
+
 ## [0.2.1](https://github.com/kloud-cnf/workflows/compare/v0.2.0...v0.2.1) (2023-05-10)
 
 
