@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/kloud-cnf/workflows/compare/v0.3.1...v0.3.2) (2023-06-05)
+
+
+### Bug Fixes
+
+* **terragrunt, aws:** revert account masking ([953ab0e](https://github.com/kloud-cnf/workflows/commit/953ab0ed20c5c31ac59aec99dd63b5615c357542))
+
 ## [0.3.1](https://github.com/kloud-cnf/workflows/compare/v0.3.0...v0.3.1) (2023-06-05)
 
 
