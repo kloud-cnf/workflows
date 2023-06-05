@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/kloud-cnf/workflows/compare/v0.3.0...v0.3.1) (2023-06-05)
+
+
+### Bug Fixes
+
+* **terragrunt, aws:** unmask AWS account id from auth step ([b135a5d](https://github.com/kloud-cnf/workflows/commit/b135a5dcf70ce0f8906bfa4fface5a89b3aa1f3a))
+
 # [0.3.0](https://github.com/kloud-cnf/workflows/compare/v0.2.1...v0.3.0) (2023-05-29)
 
 
