@@ -42,6 +42,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::${{ inputs.target-account-id }}:role/${{ inputs.ci-role-name }}
           aws-region: ${{ inputs.target-region }}
+          mask-aws-account-id: false
       - name: Terragrunt fmt
         id: fmt
         run: terragrunt hclfmt --terragrunt-check || ! cowsay "eww your formatting is fucked up"
