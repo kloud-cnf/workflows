@@ -1,3 +1,10 @@
+## [0.3.6](https://github.com/kloud-cnf/workflows/compare/v0.3.5...v0.3.6) (2023-06-11)
+
+
+### Bug Fixes
+
+* **terragrunt:** wrap value in quotes ([afd98b9](https://github.com/kloud-cnf/workflows/commit/afd98b91936b42a115cd32be15569b576f34d1d9))
+
 ## [0.3.5](https://github.com/kloud-cnf/workflows/compare/v0.3.4...v0.3.5) (2023-06-11)
 
 
