@@ -1,3 +1,10 @@
+## [0.3.5](https://github.com/kloud-cnf/workflows/compare/v0.3.4...v0.3.5) (2023-06-11)
+
+
+### Bug Fixes
+
+* **terragrunt:** update PR comment to find previous comment by workflow value ([ee3fee3](https://github.com/kloud-cnf/workflows/commit/ee3fee36ac02ba436054bbfd1d91c9e9b495ce65))
+
 ## [0.3.4](https://github.com/kloud-cnf/workflows/compare/v0.3.3...v0.3.4) (2023-06-11)
 
 
