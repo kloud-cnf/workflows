@@ -1,3 +1,10 @@
+## [0.3.7](https://github.com/kloud-cnf/workflows/compare/v0.3.6...v0.3.7) (2023-06-11)
+
+
+### Bug Fixes
+
+* **terragrunt:** wrap value, prefix comment with workflow ref ([937cb8a](https://github.com/kloud-cnf/workflows/commit/937cb8a2d4577da000ea258cf52f648f0fc4a1ed))
+
 ## [0.3.6](https://github.com/kloud-cnf/workflows/compare/v0.3.5...v0.3.6) (2023-06-11)
 
 
