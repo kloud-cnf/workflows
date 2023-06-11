@@ -55,7 +55,7 @@ jobs:
         run: terragrunt validate -no-color | tee /tmp/validate.txt
         working-directory: ${{ inputs.working-directory }}
       - name: Terragrunt plan
-        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' && github.event_name == 'push' 
         id: plan
         run: terragrunt plan
         continue-on-error: true
@@ -97,10 +97,10 @@ jobs:
             let plans = chunkSubstr(plan, 65536);
 
             for (let i = 0; i < plans.length; i++) {
-              const output = `### ${{ inputs.plan-title }} Part # ${i + 1}
-              #### Terragrunt Format and Style 🖌\ = `${{ steps.fmt.outcome }}\`
-              #### Terragrunt Initialization ⚙️\ = `${{ steps.init.outcome }}\`
-              #### Terragrunt Validation 🤖\ = `${{ steps.validate.outcome }}\`
+              const output = `### ${{ github.workflow }} Part # ${i + 1}
+              #### Terragrunt Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+              #### Terragrunt Initialization ⚙️\`${{ steps.init.outcome }}\`
+              #### Terragrunt Validation 🤖\`${{ steps.validate.outcome }}\`
 
               <details><summary>Validation Output</summary>
 
@@ -110,7 +110,7 @@ jobs:
 
               </details>
 
-              #### Terragrunt Plan 📖\ = `${{ steps.plan.outcome }}\`
+              #### Terragrunt Plan 📖\`${{ steps.plan.outcome }}\`
               <details><summary>Show Plan</summary>
 
               \`\`\`
