@@ -77,7 +77,7 @@ jobs:
               issue_number: context.issue.number,
             })
             const botComment = comments.find(comment => {
-              return comment.user.type === 'Bot' && comment.body.includes('Terragrunt Format and Style')
+              return comment.user.type === 'Bot' && comment.body.includes(${{ github.workflow }})
             })
 
             function chunkSubstr(str, size) {
@@ -98,9 +98,9 @@ jobs:
 
             for (let i = 0; i < plans.length; i++) {
               const output = `### ${{ inputs.plan-title }} Part # ${i + 1}
-              #### Terragrunt Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-              #### Terragrunt Initialization ⚙️\`${{ steps.init.outcome }}\`
-              #### Terragrunt Validation 🤖\`${{ steps.validate.outcome }}\`
+              #### Terragrunt Format and Style 🖌\ = `${{ steps.fmt.outcome }}\`
+              #### Terragrunt Initialization ⚙️\ = `${{ steps.init.outcome }}\`
+              #### Terragrunt Validation 🤖\ = `${{ steps.validate.outcome }}\`
 
               <details><summary>Validation Output</summary>
 
@@ -110,7 +110,7 @@ jobs:
 
               </details>
 
-              #### Terragrunt Plan 📖\`${{ steps.plan.outcome }}\`
+              #### Terragrunt Plan 📖\ = `${{ steps.plan.outcome }}\`
               <details><summary>Show Plan</summary>
 
               \`\`\`
