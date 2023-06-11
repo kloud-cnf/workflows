@@ -1,3 +1,10 @@
+## [0.3.4](https://github.com/kloud-cnf/workflows/compare/v0.3.3...v0.3.4) (2023-06-11)
+
+
+### Bug Fixes
+
+* **terragrunt:** ammend terragrunt flow ([1f92fe9](https://github.com/kloud-cnf/workflows/commit/1f92fe975afebfcced9ea83ec75a1045ea3ca33d))
+
 ## [0.3.3](https://github.com/kloud-cnf/workflows/compare/v0.3.2...v0.3.3) (2023-06-10)
 
 
