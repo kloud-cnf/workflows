@@ -38,7 +38,7 @@ jobs:
           tfenv install
           tgswitch
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v3.0.1 
+        uses: aws-actions/configure-aws-credentials@v3.0.2 
         with:
           role-to-assume: arn:aws:iam::${{ inputs.target-account-id }}:role/${{ inputs.ci-role-name }}
           aws-region: ${{ inputs.target-region }}
