@@ -62,4 +62,4 @@ jobs:
         if: steps.semantic.outputs.new_release_published == 'true'
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: Ilshidur/action-discord@0.3.2
+        uses: Ilshidur/action-discord@0.4.0
